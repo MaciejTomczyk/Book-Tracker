@@ -1,0 +1,380 @@
+{
+	"info": {
+		"_postman_id": "bd138b67-3f32-4bc9-807d-ccb0c0ac4746",
+		"name": "Book Tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Validation errors",
+			"item": [
+				{
+					"name": "Add Book Wrong isbn",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\" : \"1234\",\n\t\"title\" : \"MyBook\",\n\t\"author\" : \"Mozart\",\n\t\"numberOfPages\" : 1,\n\t\"rating\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8888/books",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Book Empty title",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\" : \"978-2-123-45680-3\",\n\t\"title\" : \"\",\n\t\"author\" : \"Mozart\",\n\t\"numberOfPages\" : 1,\n\t\"rating\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8888/books",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Book Empty author",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\" : \"978-2-123-45680-3\",\n\t\"title\" : \"MyBook\",\n\t\"author\" : \"\",\n\t\"numberOfPages\" : 1,\n\t\"rating\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8888/books",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Book Wrong number of pages",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\" : \"978-2-123-45680-3\",\n\t\"title\" : \"MyBook\",\n\t\"author\" : \"Mozart\",\n\t\"numberOfPages\" : 0,\n\t\"rating\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8888/books",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Book Wrong rating",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"isbn\" : \"978-2-123-45680-3\",\n\t\"title\" : \"MyBook\",\n\t\"author\" : \"Mozart\",\n\t\"numberOfPages\" : 1,\n\t\"rating\" : 74\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8888/books",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "85f959b5-8301-4f8e-8429-1b928aacf88f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9d429b07-fdf3-4e86-aa79-b6076ebf1fa9",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Add Book",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"isbn\" : \"978-2-123-45680-3\",\n\t\"title\" : \"MyBook\",\n\t\"author\" : \"Mozart\",\n\t\"numberOfPages\" : 1,\n\t\"rating\" : 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/books",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Book by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/books/978-2-123-45680-3",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"books",
+						"978-2-123-45680-3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Books (default pagination)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/books",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Books (custom pagination)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/books?page=0&size=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Book",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\" : \"MyBook\",\n\t\"author\" : \"Other author\",\n\t\"numberOfPages\" : 1,\n\t\"rating\" : 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/books/978-2-123-45680-3",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"books",
+						"978-2-123-45680-3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete existing Book",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/books/978-2-123-45680-3",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"books",
+						"978-2-123-45680-3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete non-existing Book",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/books/8-535-90277-5",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"books",
+						"8-535-90277-5"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
