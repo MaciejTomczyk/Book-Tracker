@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mt.booktracker.model.AddBookCommand;
 import com.mt.booktracker.model.UpdateBookCommand;
 import com.mt.booktracker.service.BookMapper;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,7 +32,7 @@ class BookTrackerApiTest {
 
     @BeforeEach
     @AfterEach
-    void cleanUp(){
+    void cleanUp() {
         bookRepository.deleteAll();
     }
 
@@ -38,7 +40,7 @@ class BookTrackerApiTest {
 
     @Test
     void addBook() throws Exception {
-        AddBookCommand addBookCommand = new AddBookCommand(BOOK_ID, "MyBook", "I", 123, 4);
+        AddBookCommand addBookCommand = prepareAddCommand();
 
         mockMvc.perform(MockMvcRequestBuilders.post("/books").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(addBookCommand)))
                 .andExpect(status().isCreated());
@@ -46,7 +48,7 @@ class BookTrackerApiTest {
 
     @Test
     void addExistingBook() throws Exception {
-        AddBookCommand addBookCommand = new AddBookCommand(BOOK_ID, "MyBook", "I", 123, 4);
+        AddBookCommand addBookCommand = prepareAddCommand();
         bookRepository.save(BookMapper.map(addBookCommand));
 
         mockMvc.perform(MockMvcRequestBuilders.post("/books").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(addBookCommand)))
@@ -73,9 +75,8 @@ class BookTrackerApiTest {
 
     @Test
     void updateBook() throws Exception {
-       addBookToDb();
-
-        UpdateBookCommand updateBookCommand = new UpdateBookCommand("MyBook", "Someone Else", 123, 4);
+        addBookToDb();
+        UpdateBookCommand updateBookCommand = prepareUpdateCommand();
 
         mockMvc.perform(MockMvcRequestBuilders.put("/books/" + BOOK_ID).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(updateBookCommand)))
                 .andExpect(status().isOk());
@@ -97,15 +98,23 @@ class BookTrackerApiTest {
 
     @Test
     void updateNonExistingBook() throws Exception {
-        UpdateBookCommand addBookCommand = new UpdateBookCommand("MyBook", "Someone Else", 123, 4);
+        UpdateBookCommand updateBookCommand = prepareUpdateCommand();
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/books/" + BOOK_ID).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(addBookCommand)))
+        mockMvc.perform(MockMvcRequestBuilders.put("/books/" + BOOK_ID).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(updateBookCommand)))
                 .andExpect(status().isNotFound());
     }
 
-    private void addBookToDb(){
+    private void addBookToDb() {
         AddBookCommand addBookCommand = new AddBookCommand(BOOK_ID, "MyBook", "I", 123, 4);
         bookRepository.save(BookMapper.map(addBookCommand));
+    }
+
+    private AddBookCommand prepareAddCommand() {
+        return new AddBookCommand(BOOK_ID, "MyBook", "I", 123, 4);
+    }
+
+    private UpdateBookCommand prepareUpdateCommand() {
+        return new UpdateBookCommand("MyBook", "Someone Else", 123, 4);
     }
 
 
