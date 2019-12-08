@@ -5,7 +5,7 @@
 The application requires mysql database working on a standard port to run. Either install a server on your machine or use the attached `docker-compose.yml` to setup a containerized version.
 
 ### Running the application
-Use `bootRun` task to start the application. By default the application will be available at port `8888`
+Use `bootRun` task to start the application. By default the application will be available on port `8888`
 
 
 ### Defaults
